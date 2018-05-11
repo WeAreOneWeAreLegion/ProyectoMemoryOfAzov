@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5ed86b80f009395479241b5b2c49fd55
+timeCreated: 1524069538
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - myAnimation: {instanceID: 0}
+  - shakeAnimation: {fileID: 7400000, guid: 78e62f8af6d5d7a40b905a030aae0eb9, type: 2}
+  - openAnimation: {fileID: 7400000, guid: 78e62f8af6d5d7a40b905a030aae0eb9, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
