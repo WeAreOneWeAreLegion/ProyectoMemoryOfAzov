@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.3
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.061420284, g: 0.10949621, b: 0.14532256, a: 0.3}
+  m_IndirectSpecularColor: {r: 0.061416075, g: 0.10949504, b: 0.14531955, a: 0.3}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1702,7 +1702,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 102100631}
-  m_LocalRotation: {x: 0.7071057, y: 0.70710784, z: -0.00027930757, w: -0.00028072094}
+  m_LocalRotation: {x: 0.70710564, y: 0.7071078, z: -0.00027930754, w: -0.0002807209}
   m_LocalPosition: {x: 0.0597489, y: -0.195311, z: 0.0438084}
   m_LocalScale: {x: 1, y: 1.0000004, z: 1.0000004}
   m_Children:
@@ -13701,10 +13701,10 @@ MonoBehaviour:
   m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
+  m_HorizontalAxis: LeftJoystickHorizontal
+  m_VerticalAxis: LeftJoystickVertical
+  m_SubmitButton: AButton
+  m_CancelButton: BButton
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
@@ -31721,7 +31721,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1030763079}
-  m_LocalRotation: {x: -0.7071057, y: 0.70710784, z: 0.00028072178, w: -0.00027930673}
+  m_LocalRotation: {x: -0.70710564, y: 0.7071078, z: 0.00028072175, w: -0.0002793067}
   m_LocalPosition: {x: 0.0597489, y: 0.195311, z: 0.0438095}
   m_LocalScale: {x: 1, y: 1.0000004, z: 1.0000004}
   m_Children:
