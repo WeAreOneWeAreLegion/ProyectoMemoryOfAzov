@@ -1,18 +1,18 @@
 fileFormatVersion: 2
-guid: 5ab7f9eae5946284d9e8dc9a7fdaf6e0
-timeCreated: 1525894565
+guid: c6d6d0fd0396291498ebff00ed1e8a1f
+timeCreated: 1526163078
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: Armario
+    100000: Box001
     100002: //RootNode
-    400000: Armario
+    400000: Box001
     400002: //RootNode
-    2100000: ArmarioMat
-    2300000: Armario
-    3300000: Armario
-    4300000: Armario
+    2100000: Box001Mat
+    2300000: Box001
+    3300000: Box001
+    4300000: Box001
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -43,7 +43,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.1
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
