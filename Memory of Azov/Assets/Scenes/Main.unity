@@ -422,6 +422,22 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: f02634014befefa40a30ae277386303e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d86b721bdff943946a8701d3a0105d4e, type: 2}
+    - target: {fileID: 2300000, guid: f02634014befefa40a30ae277386303e, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d86b721bdff943946a8701d3a0105d4e, type: 2}
+    - target: {fileID: 2300000, guid: f02634014befefa40a30ae277386303e, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: d86b721bdff943946a8701d3a0105d4e, type: 2}
+    - target: {fileID: 2300000, guid: f02634014befefa40a30ae277386303e, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: d86b721bdff943946a8701d3a0105d4e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f02634014befefa40a30ae277386303e, type: 3}
   m_IsPrefabParent: 0
@@ -1760,7 +1776,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 102100631}
-  m_LocalRotation: {x: 0.70710564, y: 0.7071078, z: -0.00027930754, w: -0.0002807209}
+  m_LocalRotation: {x: 0.7071057, y: 0.70710784, z: -0.00027930757, w: -0.00028072094}
   m_LocalPosition: {x: 0.0597489, y: -0.195311, z: 0.0438084}
   m_LocalScale: {x: 1, y: 1.0000004, z: 1.0000004}
   m_Children:
@@ -21903,7 +21919,7 @@ MonoBehaviour:
     changeColorButton: 101
     chargeTrigger: Fire1
     pauseButton: 27
-  isControllerPlaying: 1
+  isControllerPlaying: 0
   invertVerticalRotation: 1
   joystickRotationFactor: 3
 --- !u!1 &779275548
@@ -27933,6 +27949,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 0.75866514
       objectReference: {fileID: 0}
+    - target: {fileID: 114297286592838982, guid: 9d6652b961be7a343bf396ed191763ce,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9d6652b961be7a343bf396ed191763ce, type: 2}
   m_IsPrefabParent: 0
@@ -31735,7 +31756,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1030763079}
-  m_LocalRotation: {x: -0.70710564, y: 0.7071078, z: 0.00028072175, w: -0.0002793067}
+  m_LocalRotation: {x: -0.7071057, y: 0.70710784, z: 0.00028072178, w: -0.00027930673}
   m_LocalPosition: {x: 0.0597489, y: 0.195311, z: 0.0438095}
   m_LocalScale: {x: 1, y: 1.0000004, z: 1.0000004}
   m_Children:
