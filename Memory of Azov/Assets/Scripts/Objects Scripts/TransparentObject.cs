@@ -66,50 +66,6 @@ public class TransparentObject : MonoBehaviour {
             GameManager.Instance.IncreaseMaxGemsQuantity(gameObject);
     }
 
-    private void Update()
-    {
-        if ((isDoor && !isHorizontalDoor))
-        {
-            return;
-        }
-        if (isMaterialHidden)
-        {
-            if (isWall)
-            {
-                if (Mathf.Abs((Camera.main.transform.position - transform.position).z) > Mathf.Abs((Camera.main.transform.position - player.position).z))
-                {
-                    ShowMaterial();
-                }
-            }
-            else
-            {
-                if (Mathf.Abs((Camera.main.transform.position - transform.position).z) + GameManager.Instance.transparencyOffsetForward > Mathf.Abs((Camera.main.transform.position - player.position).z) ||
-                    (Mathf.Abs((transform.position - player.position).x) > GameManager.Instance.transparencyOffsetLateral && !isDoor))
-                {
-                    ShowMaterial();
-                }
-            }
-        }
-        else
-        {
-            if (isWall)
-            {
-                if (Mathf.Abs((Camera.main.transform.position - transform.position).z) < Mathf.Abs((Camera.main.transform.position - player.position).z))
-                {
-                    HideMaterial();
-                }
-            }
-            else
-            {
-                if (Mathf.Abs((Camera.main.transform.position - transform.position).z) + GameManager.Instance.transparencyOffsetForward < Mathf.Abs((Camera.main.transform.position - player.position).z) &&
-                Mathf.Abs((transform.position - player.position).x) < GameManager.Instance.transparencyOffsetLateral)
-                {
-                    HideMaterial();
-                }
-            }
-        }
-    }
-
     #region Hidden Methods
     public bool IsMaterialHidden()
     {
