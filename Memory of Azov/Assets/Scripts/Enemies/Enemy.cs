@@ -382,7 +382,7 @@ public class Enemy : LightenableObject {
     {
         currentHp -= lanternDamage * Time.deltaTime;
 
-
+        myMat.SetFloat("_DisAmount", 1 - (currentHp / initialHp));
 
         //GameManager.Instance.ModifyEnemyHp(transform, Mathf.RoundToInt(currentHp));
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -70,6 +71,17 @@ public class GameManager : MonoSingleton<GameManager> {
     #endregion
 
     public List<GameObject> allgems = new List<GameObject>();
+
+    [Header("\t--Pause Menu Variables--")]
+    [Tooltip("")]
+    public GameObject pauseMenuGO;
+    public GameObject restartConfirmationPanel;
+    public GameObject settingsPanel;
+    public GameObject menuConfirmationPanel;
+    public GameObject quitConfirmationPanel;
+    //public GameObject finalRestartConfirmationPanel;
+    //public GameObject finalMenuConfirmationPanel;
+    public bool confirmationPanelOpen = false;
 
     #region Private Variables
     private bool combateMode;
@@ -375,24 +387,119 @@ public class GameManager : MonoSingleton<GameManager> {
 
     private void PauseGame()
     {
-        if (isGamePaused)
+        if (!confirmationPanelOpen)
         {
-            Time.timeScale = 1;
-            pausePanel.SetActive(false);
-        }
-        else
-        {
-            Time.timeScale = 0;
-            pausePanel.SetActive(true);
-        }
+            if (isGamePaused)
+            {
+                Time.timeScale = 1;
+                pausePanel.SetActive(false);
+                pauseMenuGO.SetActive(false);
+            }
+            else
+            {
+                Time.timeScale = 0;
+                pausePanel.SetActive(true);
+                pauseMenuGO.SetActive(true);
+            }
 
-        isGamePaused = !isGamePaused;
+            isGamePaused = !isGamePaused;
+        }
     }
 
-    private void QuitGame()
+    public void Resume()
     {
-        Application.Quit();
+        isGamePaused = false;
+        pausePanel.SetActive(false);
+        pauseMenuGO.SetActive(false);
+        Time.timeScale = 1;
     }
+
+    #region Restart Button
+    public void RestartScene()
+    {
+        isGamePaused = false;
+        Time.timeScale = 1;
+        SceneManager.LoadScene(1);
+    }
+
+    public void ShowRestartConfirmationPanel()
+    {
+        confirmationPanelOpen = true;
+        restartConfirmationPanel.SetActive(true);
+        pauseMenuGO.SetActive(false);
+    }
+
+    public void HideRestartConfirmationPanel()
+    {
+        confirmationPanelOpen = false;
+        restartConfirmationPanel.SetActive(false);
+        pauseMenuGO.SetActive(true);
+    }
+    #endregion
+
+    #region Menu Button
+    public void LoadMenu()
+    {
+        isGamePaused = false;
+        SceneManager.LoadScene(0);
+    }
+
+    public void ShowMenuConfirmationPanel()
+    {
+        confirmationPanelOpen = true;
+        menuConfirmationPanel.SetActive(true);
+        pauseMenuGO.SetActive(false);
+    }
+
+    public void HideMenuConfirmationPanel()
+    {
+        confirmationPanelOpen = false;
+        menuConfirmationPanel.SetActive(false);
+        pauseMenuGO.SetActive(true);
+    }
+    #endregion
+
+    #region Settings Button
+    public void ShowSettingsPanel()
+    {
+        confirmationPanelOpen = true;
+        settingsPanel.SetActive(true);
+        pauseMenuGO.SetActive(false);
+    }
+
+    public void HideSettingsPanel()
+    {
+        confirmationPanelOpen = false;
+        settingsPanel.SetActive(false);
+        pauseMenuGO.SetActive(true);
+    }
+    #endregion
+
+    #region Quit Button
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false; //si le damos al botón de Quit en Unity, parará de jugar
+#else
+        Application.Quit(); //si le damos Quit fuera de Unity, cerrará el programa
+#endif
+    }
+
+
+    public void ShowQuitConfirmationPanel()
+    {
+        confirmationPanelOpen = true;
+        quitConfirmationPanel.SetActive(true);
+        pauseMenuGO.SetActive(false);
+    }
+
+    public void HideQuitConfirmationPanel()
+    {
+        confirmationPanelOpen = false;
+        quitConfirmationPanel.SetActive(false);
+        pauseMenuGO.SetActive(true);
+    }
+    #endregion
     #endregion
 
     #region Game State Methods
