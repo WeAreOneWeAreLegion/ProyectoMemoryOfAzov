@@ -6,9 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: UniformOutline
-  m_Shader: {fileID: 4800000, guid: 3968ac844c10a4449aa8535bfa0abaed, type: 3}
-  m_ShaderKeywords: 
+  m_Name: MyGhostMaterial
+  m_Shader: {fileID: 4800000, guid: acc75d5d15b2c474b869ad379b9ad751, type: 3}
+  m_ShaderKeywords: ALPHA
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -39,11 +39,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 427ff48b098658742bdcce953d607e78, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9cc9f9168deb316499491d88af9f5b9d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: 9cc9f9168deb316499491d88af9f5b9d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -54,20 +58,29 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Ramp:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _ALPHA: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _DisAmount: 0
+    - _DisLineWidth: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _LIGHTMAP: 0
     - _Metallic: 0
     - _Mode: 0
+    - _NScale: 0.2
     - _OcclusionStrength: 1
-    - _OutlineWidth: 0
     - _Parallax: 0.02
-    - _RimPow: 1
+    - _RimPower: 3
+    - _Shininess: 0.7
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -75,6 +88,9 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DisLineColor: {r: 0.030330881, g: 0.24264705, b: 0.13722108, a: 1}
+    - _DisLineColorEx: {r: 0.67182094, g: 0.76248807, b: 0.83823526, a: 1}
+    - _Emission: {r: 0.12629758, g: 0.53676474, b: 0.23103741, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutlineColor: {r: 0.35294116, g: 0.35294116, b: 0.35294116, a: 1}
-    - _RimCol: {r: 1, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 0.26, g: 0.19, b: 0.16, a: 0}
+    - _SpecColor: {r: 1, g: 1, b: 1, a: 0}
