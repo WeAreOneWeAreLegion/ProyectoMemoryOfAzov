@@ -10,6 +10,7 @@ TagManager:
   - DoorTrigger
   - Bell
   - HittableObject
+  - FakeWall
   layers:
   - Default
   - TransparentFX

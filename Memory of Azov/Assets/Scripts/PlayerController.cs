@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    public enum State { Playing, CrossDoor, Cinematic }
+    public enum State { Playing, CrossDoor, FakeWall, Cinematic }
     public enum LightColor { Neutral, Secondary, Third }
 
     #region Public Variables
@@ -34,10 +34,12 @@ public class PlayerController : MonoBehaviour {
     [Range(1,15)] public float lanternDamageLength = 10;
     [Tooltip("Distancia en el cual la linterna se acortara cuando esta cargado al maximo")]
     [Range(1,15)] public float lanternChargingLength = 1;
-    [Tooltip("Este valor se aplica de forma positiva. *Literna apuntando arriba*")]
-    [Range(0,60)] public float topLanternAngle = 45;
-    [Tooltip("Este valor se aplica de forma negativa. *Literna apuntando abajo*")]
-    [Range(0, 30)] public float bottomLanternAngle = 5;
+    //[Tooltip("Este valor se aplica de forma positiva. *Literna apuntando arriba*")]
+    //[Range(0,60)] public float topLanternAngle = 45;
+    //[Tooltip("Este valor se aplica de forma negativa. *Literna apuntando abajo*")]
+    //[Range(0, 30)] public float bottomLanternAngle = 5;
+    [Tooltip("Este valor se aplica en todos los angulos. *Literna apuntando a cualquier lado*")]
+    [Range(0, 90)] public float lanternAngle = 5;
     [Tooltip("El radio que tiene el personaje para aumentar o reducir la luz de las linternas automaticamente, solo se aplica cuando miras a camara")]
     [Range(0,30)] public float angleOfLightDecrease;
     [Tooltip("La velocidad a la que la luz pasa de su valor al valor minimo o maximo hacia la camara")]
@@ -76,10 +78,14 @@ public class PlayerController : MonoBehaviour {
     [Range(0, 2)] public float timeInvulnerable = 0.5f;
     [Tooltip("Tiempo entre visible e invisible mientras esta dañado")]
     [Range(0, 1)] public float timeBetweenBlinks = 0.2f;
+    [Tooltip("Tiempo de vibracion cuando me dañan")]
+    [Range(0, 1)] public float timeVibrating = 0.35f;
 
     [Header("\t    Own Script Variables")]
     [Tooltip("Transform linterna")]
     public Transform lantern;
+    [Tooltip("Transform elbow")]
+    public Transform elbowPoint;
     [Tooltip("Referencia al visual")]
     public GameObject visualObject;
     [Tooltip("Luz linterna")]
@@ -95,7 +101,7 @@ public class PlayerController : MonoBehaviour {
     #region Private Variables
     private int currentHp;
     private float xLanternRotationValue;
-    private float yRotationValue;
+    private float yLanternRotationValue;
     private bool areLightsDecreased;
     private bool areLightsIncreased;
     private bool canMove;
@@ -104,6 +110,7 @@ public class PlayerController : MonoBehaviour {
     private bool isLightCharging;
     private bool isMoving;
     private bool autoFace;
+    private bool isVibrating;
     private Vector3 direction;
     private Vector3 faceDirection;
 
@@ -144,6 +151,7 @@ public class PlayerController : MonoBehaviour {
     private Vector3 directionToGoCrossDoor;
 
     private ConectionScript currentDoorCrossing;
+    private FakeWallScript currentFakeWall;
     #endregion
 
     private void Awake()
@@ -200,6 +208,10 @@ public class PlayerController : MonoBehaviour {
         {
             CrossDoor();
         }
+        else if (currentState == State.FakeWall)
+        {
+            CheckForWallTurned();
+        }
         else if (currentState == State.Cinematic)
         {
 
@@ -241,16 +253,6 @@ public class PlayerController : MonoBehaviour {
         if (InputsManager.Instance.GetChangeColorButtonInputDown())
             ChangeColor();
 
-        if (InputsManager.Instance.GetSwitchButtonInput())
-        {
-            lightEnabled = true;
-            SwitchLight();
-        }
-        else
-        {
-            lightEnabled = false;
-            SwitchLight();
-        }
 
         xMove = InputsManager.Instance.GetMovementX();
         zMove = InputsManager.Instance.GetMovementY();
@@ -266,7 +268,7 @@ public class PlayerController : MonoBehaviour {
         direction.x = xMove;
         direction.z = zMove;
 
-        if (!independentFacing && canMove)
+        if (/*!independentFacing && */canMove)
         {
             //Face where you go
 
@@ -318,25 +320,29 @@ public class PlayerController : MonoBehaviour {
 
     private void RotateByJoystick()
     {
-        if (xMove == 0 && zMove == 0 || independentFacing)
-            transform.Rotate(Vector3.up, xRotation * rotationSpeed * Time.deltaTime);
+        //transform.Rotate(Vector3.up, xRotation * rotationSpeed * Time.deltaTime);
 
-        xLanternRotationValue = Mathf.Clamp(xLanternRotationValue + yRotation * lanternRotationSpeed * Time.deltaTime, -topLanternAngle, bottomLanternAngle);
+        //xLanternRotationValue = Mathf.Clamp(xLanternRotationValue + yRotation * lanternRotationSpeed * Time.deltaTime, -topLanternAngle, bottomLanternAngle);
 
-        if (xLanternRotationValue < -topLanternAngle + 10)
+        xLanternRotationValue = Mathf.Lerp(-lanternAngle, lanternAngle, 0.5f + (yRotation / 2));
+        yLanternRotationValue = Mathf.Lerp(-lanternAngle, lanternAngle, 0.5f + (xRotation / 2));
+
+        //lanternAngle
+
+        if (xLanternRotationValue < -lanternAngle + 10)
         {
             CameraBehaviour.Instance.ChangeCameraLookState(CameraBehaviour.CameraLookState.LookUp);
         }
-        else if (xLanternRotationValue > bottomLanternAngle - 3)
+        else if (xLanternRotationValue > lanternAngle - 3)
         {
             CameraBehaviour.Instance.ChangeCameraLookState(CameraBehaviour.CameraLookState.LookDown);
         }
-        else if (xLanternRotationValue > -topLanternAngle + 15 && xLanternRotationValue < bottomLanternAngle - 6)
+        else if (xLanternRotationValue > -lanternAngle + 15 && xLanternRotationValue < lanternAngle - 6)
         {
             CameraBehaviour.Instance.ChangeCameraLookState(CameraBehaviour.CameraLookState.Normal);
         }
 
-        lantern.localRotation = Quaternion.Euler(xLanternRotationValue, 0, 0);
+        lantern.localRotation = Quaternion.Euler(xLanternRotationValue, yLanternRotationValue, 0);
     }
 
     private void RotateByMove()
@@ -441,11 +447,13 @@ public class PlayerController : MonoBehaviour {
         {
             Enemy gc = g.GetComponent<Enemy>();
 
-            if (Mathf.Abs(Vector3.Angle((g.transform.position - lantern.transform.position).normalized, lantern.forward)) < lanternDamageRadius && (!gc.IsInSight() || gc.IsStunned() != isMaxIntensity))
+            Vector3 ghostPositionWithRadius = GetGhostPositionWithRadius(gc.transform.position, gc.ghostSize);
+
+            if (Mathf.Abs(Vector3.Angle((ghostPositionWithRadius - lantern.transform.position).normalized, lantern.forward)) < lanternDamageRadius && (!gc.IsInSight() || gc.IsStunned() != isMaxIntensity))
             {
                 gc.InsideLanternRange(lanternDamage, isMaxIntensity);
             }
-            else if (Mathf.Abs(Vector3.Angle((g.transform.position - lantern.transform.position).normalized, lantern.forward)) > lanternDamageRadius && gc.IsInSight())
+            else if (Mathf.Abs(Vector3.Angle((ghostPositionWithRadius - lantern.transform.position).normalized, lantern.forward)) > lanternDamageRadius && gc.IsInSight())
             {
                 gc.OutsideLanternRange();
             }
@@ -501,13 +509,18 @@ public class PlayerController : MonoBehaviour {
         {
             hitTimer += Time.deltaTime;
 
+            if (isVibrating && hitTimer >= timeVibrating)
+            {
+                isVibrating = false;
+                InputsManager.Instance.DeactiveVibration();
+            }
+
             if (hitTimer >= timeInvulnerable)
             {
-                StopCoroutine("BlinkCoroutine");
-                visualObject.SetActive(true);
-
                 canMove = true;
+
                 stopByHit = false;
+                visualObject.SetActive(true);
 
                 hitTimer = 0;
             }
@@ -563,11 +576,14 @@ public class PlayerController : MonoBehaviour {
 
         if (actionDetected)
         {
-            if (hit.transform.tag != GameManager.Instance.GetTagOfDesiredType(GameManager.TypeOfTag.Wall) &&
-                hit.transform.tag != GameManager.Instance.GetTagOfDesiredType(GameManager.TypeOfTag.Player) &&
-                hit.transform.tag != GameManager.Instance.GetTagOfDesiredType(GameManager.TypeOfTag.Door))
+            string hitTag = hit.transform.tag;
+
+            if (hitTag != GameManager.Instance.GetTagOfDesiredType(GameManager.TypeOfTag.Wall) &&
+                hitTag != GameManager.Instance.GetTagOfDesiredType(GameManager.TypeOfTag.Player) &&
+                hitTag != GameManager.Instance.GetTagOfDesiredType(GameManager.TypeOfTag.Door) &&
+                hitTag != "Untagged")
             {
-                if (hit.transform.tag == GameManager.Instance.GetTagOfDesiredType(GameManager.TypeOfTag.DoorTrigger))
+                if (hitTag == GameManager.Instance.GetTagOfDesiredType(GameManager.TypeOfTag.DoorTrigger))
                 {
                     if (hit.transform.GetComponent<ConectionScript>().GetIsHiddenDoor())
                     {
@@ -619,7 +635,7 @@ public class PlayerController : MonoBehaviour {
                 return;
             }
 
-            //Perform action
+            //Face action
             if (hitTag == GameManager.Instance.GetTagOfDesiredType(GameManager.TypeOfTag.Door) ||
                 hitTag == GameManager.Instance.GetTagOfDesiredType(GameManager.TypeOfTag.DoorTrigger))
             {
@@ -630,12 +646,15 @@ public class PlayerController : MonoBehaviour {
                 faceDirection = (new Vector3(hit.transform.position.x, transform.position.y, hit.transform.position.z) - transform.position).normalized;
             }
 
+            //Perform action
             if (hitTag == GameManager.Instance.GetTagOfDesiredType(GameManager.TypeOfTag.DoorTrigger))
             {
                 //Open door
                 transform.forward = -hit.normal;
-                if (hit.transform.GetComponent<ConectionScript>().OpenDoorAnimation())
+                if (hit.transform.GetComponent<ConectionScript>().IsDoorOpen())
                 {
+                    hit.transform.GetComponent<ConectionScript>().OpenDoorAnimation();
+
                     currentDoorCrossing = hit.transform.GetComponent<ConectionScript>();
 
                     transform.position = currentDoorCrossing.GetDoorOpeningPos(transform.position);
@@ -645,6 +664,24 @@ public class PlayerController : MonoBehaviour {
                     myAudioSource.clip = SoundManager.Instance.GetSoundByRequest(SoundManager.SoundRequest.P_OpenDoor);
                     myAudioSource.Play();
 
+                    return;
+                }
+            }
+            else if (hitTag == GameManager.Instance.GetTagOfDesiredType(GameManager.TypeOfTag.FakeWall))
+            {
+                Debug.Log("fake wall detected");
+                transform.forward = -hit.normal;
+                if (hit.transform.parent.GetComponent<FakeWallScript>().OpenDoorAnimation())
+                {
+                    Debug.Log("fake wall taked");
+                    currentFakeWall = hit.transform.parent.GetComponent<FakeWallScript>();
+                    transform.parent = hit.transform;
+
+                    transform.position = currentFakeWall.GetFakeWallPoint(transform.position);
+                    ChangePlayerState(State.FakeWall);
+
+                    myAudioSource.clip = SoundManager.Instance.GetSoundByRequest(SoundManager.SoundRequest.P_OpenDoor); //Deberia ser sonido libreria
+                    myAudioSource.Play();
                     return;
                 }
             }
@@ -789,7 +826,6 @@ public class PlayerController : MonoBehaviour {
     #endregion
 
     #region Cross Door Methods
-
     public void CrossDoor()
     {
         if (isCrossingDoor)
@@ -820,7 +856,19 @@ public class PlayerController : MonoBehaviour {
         pointToGoCrossDoor = otherSideDoor;
         directionToGoCrossDoor = (otherSideDoor - transform.position).normalized;
     }
+    #endregion
 
+    #region Fake Wall Methods
+    public void CheckForWallTurned()
+    {
+        if (currentFakeWall.IsFullTurned())
+        {
+            ChangePlayerState(State.Playing);
+            transform.parent = null;
+            CameraBehaviour.Instance.ResetWallDetection();
+            currentFakeWall.CloseDoorAnimation();
+        }
+    }
     #endregion
 
     #region Public Methods
@@ -857,6 +905,9 @@ public class PlayerController : MonoBehaviour {
     {
         if (stopByHit)
             return;
+
+        isVibrating = true;
+        InputsManager.Instance.ActiveVibration();
 
         currentHp -= damage;
 
@@ -915,6 +966,17 @@ public class PlayerController : MonoBehaviour {
         return newPoint;
     }
 
+    public Vector3 GetGhostPositionWithRadius(Vector3 pos, float radius)
+    {
+        float magnitude = (pos - lantern.transform.position).magnitude;
+
+        Vector3 positionInLine = lantern.transform.position + lanternLight.transform.forward * magnitude;
+
+        Vector3 directionFromPointToGhost = (pos - positionInLine).normalized;
+
+        return (pos - (directionFromPointToGhost * radius));
+    }
+
     public bool IsCurrentLightOfColor(LightColor colorToCompare)
     {
         return colorToCompare == currentLightColor;
@@ -934,11 +996,13 @@ public class PlayerController : MonoBehaviour {
     #region Corutine Methods
     private IEnumerator BlinkCoroutine()
     {
-        while (true)
+        while (stopByHit)
         {
             visualObject.SetActive(!visualObject.activeInHierarchy);
             yield return new WaitForSeconds(timeBetweenBlinks);
         }
+        visualObject.SetActive(true);
+        yield return null;
     }
     #endregion
 

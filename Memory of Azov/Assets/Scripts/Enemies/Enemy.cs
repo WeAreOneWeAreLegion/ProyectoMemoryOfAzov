@@ -33,6 +33,8 @@ public class Enemy : LightenableObject {
     public int initialHp = 100;
     [Tooltip("Tiempo que el personaje estara aturdido si lo aturden")]
     [Range(1, 4)] public float timeStuned = 2f;
+    [Tooltip("Tamaño del fantasma")]
+    public float ghostSize;
 
     [Header("Attack Variables")]
     [Tooltip("Valor del ataque del personaje")]
@@ -97,6 +99,7 @@ public class Enemy : LightenableObject {
         initialSpeed = speed;
         currentHp = initialHp;
         oscilatorLifeTime = -0.75f;
+        ghostSize = GetComponent<SphereCollider>().radius;
         target = GameManager.Instance.GetPlayer();
 
         if (itemToDrop == ObjectsManager.ItemRequest.Gem)
@@ -122,15 +125,26 @@ public class Enemy : LightenableObject {
     {
         currentGhostColor = enemyData.ghostColor;
 
+        Color ghostColor = Color.white;
+
         switch (currentGhostColor)
         {
             case PlayerController.LightColor.Neutral:
+                ghostColor = GameManager.Instance.player.neutralColor;
                 break;
             case PlayerController.LightColor.Secondary:
+                ghostColor = GameManager.Instance.player.secondColor;
                 break;
             case PlayerController.LightColor.Third:
+                ghostColor = GameManager.Instance.player.thirdColor;
                 break;
         }
+
+        if (myMat == null)
+        {
+            myMat = GetComponentInChildren<MeshRenderer>().material;
+        }
+        myMat.SetColor("_RimColor", ghostColor);
 
         speed = enemyData.speed;
         rotationSpeed = enemyData.rotationSpeed;
@@ -307,7 +321,7 @@ public class Enemy : LightenableObject {
     #region Lighten Methods
     protected void CheckPlayerDistance()
     {
-        if (Vector3.Distance(GameManager.Instance.GetPlayer().position, transform.position) < GameManager.Instance.player.GetInitialLanternLength())
+        if (Vector3.Distance(GameManager.Instance.GetPlayer().position, transform.position) < GameManager.Instance.player.lanternDamageLength)
         {
             GameManager.Instance.player.OnGhostEnter(this.gameObject);
         }
@@ -439,6 +453,7 @@ public class Enemy : LightenableObject {
     #region Unity Gizmos Method
     private void OnDrawGizmosSelected()
     {
+        Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, attackRadius);
 
         Gizmos.color = Color.green;

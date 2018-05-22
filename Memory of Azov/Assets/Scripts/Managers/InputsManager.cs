@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
 
 public class InputsManager : MonoSingleton<InputsManager> {
 
@@ -26,7 +27,6 @@ public class InputsManager : MonoSingleton<InputsManager> {
         public XboxInputs rotateHorizontal;
         public XboxInputs rotateVertical;
         public XboxInputs actionButton;
-        public XboxInputs switchLanternButton;
         public XboxInputs changeColorButton;
         public XboxInputs chargeTrigger1;
         public XboxInputs chargeTrigger2;
@@ -41,7 +41,6 @@ public class InputsManager : MonoSingleton<InputsManager> {
         public string rotateHorizontal;
         public string rotateVertical;
         public KeyCode actionButton;
-        public KeyCode switchLanternButton;
         public KeyCode changeColorButton;
         public string chargeTrigger;
         public KeyCode pauseButton;
@@ -62,6 +61,12 @@ public class InputsManager : MonoSingleton<InputsManager> {
     [Tooltip("Cuantas veces girara mas rapido el joystick")]
     [Range(1, 10)]
     public float joystickRotationFactor = 3;
+    [HideInInspector]
+    public float leftPlayer1Vibrator; //Variable para poder vibrar valor izquierdo
+    [HideInInspector]
+    public float rightPlayer1Vibrator; //Variable para poder vibrar valor derecho
+    [Tooltip("Cuantas veces mas pequeño sera el valor de vibracion respecto el normal")]
+    public float vibrateReductionValue = 3;
     #endregion
 
     #region Input Methods
@@ -107,11 +112,6 @@ public class InputsManager : MonoSingleton<InputsManager> {
         return isControllerPlaying ? Input.GetButtonDown(xboxInputs.actionButton.ToString()) : Input.GetKeyDown(pcInputs.actionButton);
     }
 
-    public bool GetSwitchButtonInput()
-    {
-        return isControllerPlaying ? Input.GetButton(xboxInputs.switchLanternButton.ToString()) : Input.GetKey(pcInputs.switchLanternButton);
-    }
-
     public bool GetChangeColorButtonInputDown()
     {
         return isControllerPlaying ? Input.GetButtonDown(xboxInputs.changeColorButton.ToString()) : Input.GetKeyDown(pcInputs.changeColorButton);
@@ -130,6 +130,34 @@ public class InputsManager : MonoSingleton<InputsManager> {
     public bool GetStartButtonDown()
     {
         return isControllerPlaying ? Input.GetButtonUp(xboxInputs.pauseButton.ToString()) : Input.GetKeyDown(pcInputs.pauseButton);
+    }
+
+    public void ActiveVibration()
+    {
+        LeftTriggerPlayer1Value(1);
+        RightTriggerPlayer1Value(1);
+    }
+
+    public void VibrationByValue(float value)
+    {
+        LeftTriggerPlayer1Value(value);
+        RightTriggerPlayer1Value(value);
+    }
+
+    public void DeactiveVibration()
+    {
+        LeftTriggerPlayer1Value(0);
+        RightTriggerPlayer1Value(0);
+    }
+
+    private void LeftTriggerPlayer1Value(float value)
+    {
+        leftPlayer1Vibrator = value;
+    }
+
+    private void RightTriggerPlayer1Value(float value)
+    {
+        rightPlayer1Vibrator = value / vibrateReductionValue;
     }
     #endregion
 

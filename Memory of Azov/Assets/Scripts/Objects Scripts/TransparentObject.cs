@@ -66,6 +66,58 @@ public class TransparentObject : MonoBehaviour {
             GameManager.Instance.IncreaseMaxGemsQuantity(gameObject);
     }
 
+    private void Update()
+    {
+        if ((isDoor && !isHorizontalDoor))
+        {
+            return;
+        }
+        if (isMaterialHidden)
+        {
+            if (isWall)
+            {
+                if (Mathf.Abs((Camera.main.transform.position - transform.position).z) > Mathf.Abs((Camera.main.transform.position - player.position).z))
+                {
+                    ShowMaterial();
+                }
+            }
+            else
+            {
+                if (Mathf.Abs((Camera.main.transform.position - transform.position).z) + GameManager.Instance.transparencyOffsetForward > Mathf.Abs((Camera.main.transform.position - player.position).z) ||
+                    (Mathf.Abs((transform.position - player.position).x) > GameManager.Instance.transparencyOffsetLateral && !isDoor))
+                {
+                    ShowMaterial();
+                }
+            }
+        }
+        else
+        {
+            try
+            {
+                if (isWall)
+                {
+                    if (Mathf.Abs((Camera.main.transform.position - transform.position).z) < Mathf.Abs((Camera.main.transform.position - player.position).z))
+                    {
+                        HideMaterial();
+                    }
+                }
+                else
+                {
+                    if (Mathf.Abs((Camera.main.transform.position - transform.position).z) + GameManager.Instance.transparencyOffsetForward < Mathf.Abs((Camera.main.transform.position - player.position).z) &&
+                    Mathf.Abs((transform.position - player.position).x) < GameManager.Instance.transparencyOffsetLateral)
+                    {
+                        HideMaterial();
+                    }
+                }
+            }
+
+            catch
+            {
+                Debug.LogError(gameObject.name);
+            }
+        }
+    }
+
     #region Hidden Methods
     public bool IsMaterialHidden()
     {
@@ -119,7 +171,7 @@ public class TransparentObject : MonoBehaviour {
             GameObject go = EnemyManager.Instance.GetEnemy(hit.transform != null ? hit.transform.parent : this.transform, enemyData);
 
             go.transform.position = new Vector3(transform.position.x, hit.point.y + EnemyManager.Instance.enemyFloorYOffset, transform.position.z);
-            go.transform.forward = transform.forward;
+            go.transform.forward = GameManager.Instance.GetPlayer().position - transform.position;
 
             spawnGhost = false;
 

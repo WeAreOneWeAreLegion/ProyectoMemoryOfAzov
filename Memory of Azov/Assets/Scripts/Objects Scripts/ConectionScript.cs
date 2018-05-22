@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ConectionScript : LightenableObject {
 
-    public enum DoorType { Normal, Hidden, Bell }
+    public enum DoorType { Normal, Hidden, Bell, OpenByOneSide }
 
     #region Public Variables
     [Header("\tGame Designers Variables")]
@@ -16,6 +16,8 @@ public class ConectionScript : LightenableObject {
     public bool isLightSwitcher;
     [Tooltip("Este valor indica cuanto rato debes estar enfocando la puerta escondida para que se revele")]
     [Range(1,5)] public float lightenedTimeToShow = 3f;
+    [Tooltip("Este valor indica si la puerta se abrira solo por la derecha, en caso contrario por el izquierdo")]
+    public bool isRightOpener;
 
     [Header("\t    Own Script Variables")]
     [Range(1,15)] public float checkerDistance = 6f;
@@ -293,11 +295,20 @@ public class ConectionScript : LightenableObject {
             //Right closer
             return new Vector3(leftPoint.position.x, targetPos.y, leftPoint.position.z);
     }
-        
-    public bool OpenDoorAnimation()
+
+    public bool IsRightClosestPoint(Vector3 targetPos)
     {
-        if (isDoorOpen && currentDoorType == DoorType.Normal)
+        return Vector3.Distance(targetPos, leftPoint.position) > Vector3.Distance(targetPos, rightPoint.position);
+    }
+
+    public void OpenDoorAnimation()
+    {
+        if (isDoorOpen && currentDoorType == DoorType.Normal || (currentDoorType == DoorType.OpenByOneSide && isRightOpener ? IsRightClosestPoint(GameManager.Instance.GetPlayer().transform.position) : !IsRightClosestPoint(GameManager.Instance.GetPlayer().transform.position)))
         {
+
+            if (currentDoorType == DoorType.OpenByOneSide)
+                currentDoorType = DoorType.Normal;
+
             GameManager.Instance.ShowAllDoors();
 
             lightsSwitched = false;
@@ -320,13 +331,12 @@ public class ConectionScript : LightenableObject {
                 cb.ChangeCameraBehaviourState(CameraBehaviour.CameraState.CrossDoor);
                 cb.MoveAtPoint(transform.position, GameManager.Instance.GetPlayer().position.x > transform.position.x);
             }
-            return true;
         }
-        else
-        {
-            //Sound deny opening
-            return false;
-        }
+    }
+
+    public bool IsDoorOpen()
+    {
+        return isDoorOpen && (currentDoorType == DoorType.Normal || (currentDoorType == DoorType.OpenByOneSide && isRightOpener ? IsRightClosestPoint(GameManager.Instance.GetPlayer().transform.position) : !IsRightClosestPoint(GameManager.Instance.GetPlayer().transform.position)));
     }
 
     public void CloseDoorAnimation()

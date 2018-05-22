@@ -68,7 +68,10 @@ public class WallPaint : LightenableObject
 
             timer += Time.deltaTime;
 
-            if (timer >= timeToSpawnObject)
+            //Vibrate
+            InputsManager.Instance.VibrationByValue(timer / (timeToSpawnObject * 2));
+
+            if (timer >= timeToSpawnObject) //Spawn object and deactive
             {
                 if (spawnGhost)
                 {
@@ -96,6 +99,8 @@ public class WallPaint : LightenableObject
                     }
 
                 }
+
+                InputsManager.Instance.DeactiveVibration();
                 gameObject.SetActive(false);
             }
         }
@@ -106,6 +111,7 @@ public class WallPaint : LightenableObject
                 if (particles.activeInHierarchy)
                     particles.SetActive(false);
 
+                InputsManager.Instance.DeactiveVibration();
                 timer = 0;
             }
         }

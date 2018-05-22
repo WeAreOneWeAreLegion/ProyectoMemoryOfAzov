@@ -66,18 +66,12 @@ public class ObjectsManager : MonoSingleton<ObjectsManager> {
         if (rq == ItemRequest.None)
             return null;
 
-        Ray ray = new Ray(callTransform.position + Vector3.up, Vector3.down);
-
-        RaycastHit hit;
-
-        Physics.Raycast(ray, out hit, 100, LayerMask.GetMask("FloorLayer"));
-
         switch (rq)
         {
             case ItemRequest.Gem:
-                return GetGem(hit.transform.parent);
+                return GetGem(callTransform.parent);
             case ItemRequest.Health:
-                return GetHealth(hit.transform.parent);
+                return GetHealth(callTransform.parent);
             default:
                 return null;
         }

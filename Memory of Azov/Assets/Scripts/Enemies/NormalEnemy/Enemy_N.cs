@@ -16,8 +16,12 @@ public class Enemy_N : Enemy
     {
         base.SetUpEnemyVariables(enemyData);
 
+
         if (currentState != null)
+        {
             ChangeState(new AwakeState_N());
+            Debug.Log("SetUpByVariables");
+        }
     }
 
     public override void RecieveDamage()

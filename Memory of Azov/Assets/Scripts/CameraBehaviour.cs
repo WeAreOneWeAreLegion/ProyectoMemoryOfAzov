@@ -118,13 +118,13 @@ public class CameraBehaviour : MonoSingleton<CameraBehaviour> {
             Physics.Raycast(ray, out hit, raySidesDistance, LayerMask.GetMask("WallLayer"));
             //Set left wall
             xLeftWall = hit.point.x;
-            Debug.Log("Left wall name: "+hit.transform.name+" de: " +hit.transform.parent.parent.name);
+            //Debug.Log("Left wall name: "+hit.transform.name+" de: " +hit.transform.parent.parent.name);
 
             ray = new Ray(target.transform.position, transform.right);
             Physics.Raycast(ray, out hit, raySidesDistance, LayerMask.GetMask("WallLayer"));
             //Set right wall
             xRightWall = hit.point.x;
-            Debug.Log("Right wall name: "+hit.transform.name + " de: " + hit.transform.parent.parent.name);
+            //Debug.Log("Right wall name: "+hit.transform.name + " de: " + hit.transform.parent.parent.name);
 
             ray = new Ray(target.transform.position, -transform.forward);
             Physics.Raycast(ray, out hit, raySidesDistance, LayerMask.GetMask("WallLayer"));
@@ -138,7 +138,7 @@ public class CameraBehaviour : MonoSingleton<CameraBehaviour> {
                 Debug.LogWarning("Error no back wall");
                 EditorApplication.isPaused = true;
             }
-            Debug.Log("Back wall name: "+hit.transform.name + " de: " + hit.transform.parent.parent.name);
+            //Debug.Log("Back wall name: "+hit.transform.name + " de: " + hit.transform.parent.parent.name);
 
             wallsFound = true;
         }

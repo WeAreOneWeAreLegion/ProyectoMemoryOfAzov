@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoSingleton<GameManager> {
 
-    public enum TypeOfTag { Player, Enemy, Wall, Door, DoorTrigger, Bell, HittableObject }
+    public enum TypeOfTag { Player, Enemy, Wall, Door, DoorTrigger, Bell, HittableObject, FakeWall }
     public enum ButtonRequest { A, B, X, Y, RB, LB, RT, LT }
 
     #region Public Variables
@@ -36,6 +36,8 @@ public class GameManager : MonoSingleton<GameManager> {
     public List<GameObject> roomsList = new List<GameObject>();
     [Tooltip("Referencia a todas las puertas")]
     public List<ConectionScript> doorsList = new List<ConectionScript>();
+    [Tooltip("Referencia a todas las puertas")]
+    public List<FakeWallScript> fakeWallsList = new List<FakeWallScript>();
 
     [Header("HUD Variables")]
     //Main Canvas
@@ -63,7 +65,7 @@ public class GameManager : MonoSingleton<GameManager> {
     public Text fpsText;
 
     [Header("Tags List")]
-    [Tooltip("0.Player, 1.Enemy, 2.Wall, 3.Door 4.DoorTrigger 5.Bell")]
+    [Tooltip("0.Player, 1.Enemy, 2.Wall, 3.Door 4.DoorTrigger 5.Bell 6.HittableObjets 7.FakeWall")]
     public List<string> tagList = new List<string>();
     #endregion
 
@@ -96,10 +98,6 @@ public class GameManager : MonoSingleton<GameManager> {
 
     private void Start()
     {
-
-        foreach (ConectionScript c in FindObjectsOfType<ConectionScript>())
-            doorsList.Add(c);
-
         pausePanel.SetActive(false);
 
         //Set-up HUD
@@ -142,6 +140,14 @@ public class GameManager : MonoSingleton<GameManager> {
             if (d.IsDoorFromRoom(hit.transform.parent.gameObject))
             {
                 d.UnblockDoor();
+            }
+        }
+
+        foreach (FakeWallScript f in fakeWallsList)
+        {
+            if (f.IsDoorFromRoom(hit.transform.parent.gameObject))
+            {
+                f.UnblockDoor();
             }
         }
     }
