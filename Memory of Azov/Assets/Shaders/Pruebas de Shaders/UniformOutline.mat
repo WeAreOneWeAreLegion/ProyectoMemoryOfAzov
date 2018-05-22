@@ -67,7 +67,7 @@ Material:
     - _OcclusionStrength: 1
     - _OutlineWidth: 0
     - _Parallax: 0.02
-    - _RimPow: 1
+    - _RimPow: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

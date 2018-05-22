@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 222521664173815996}
   - component: {fileID: 114760066869815620}
   m_Layer: 5
-  m_Name: PauseMenuPanel (1)
+  m_Name: PauseMenuPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
