@@ -34,12 +34,10 @@ public class PlayerController : MonoBehaviour {
     [Range(1,15)] public float lanternDamageLength = 10;
     [Tooltip("Distancia en el cual la linterna se acortara cuando esta cargado al maximo")]
     [Range(1,15)] public float lanternChargingLength = 1;
-    //[Tooltip("Este valor se aplica de forma positiva. *Literna apuntando arriba*")]
-    //[Range(0,60)] public float topLanternAngle = 45;
-    //[Tooltip("Este valor se aplica de forma negativa. *Literna apuntando abajo*")]
-    //[Range(0, 30)] public float bottomLanternAngle = 5;
-    [Tooltip("Este valor se aplica en todos los angulos. *Literna apuntando a cualquier lado*")]
-    [Range(0, 90)] public float lanternAngle = 5;
+    [Tooltip("Este valor se aplica de forma positiva. *Literna apuntando arriba*")]
+    [Range(0,60)] public float topLanternAngle = 45;
+    [Tooltip("Este valor se aplica de forma negativa. *Literna apuntando abajo*")]
+    [Range(0, 30)] public float bottomLanternAngle = 5;
     [Tooltip("El radio que tiene el personaje para aumentar o reducir la luz de las linternas automaticamente, solo se aplica cuando miras a camara")]
     [Range(0,30)] public float angleOfLightDecrease;
     [Tooltip("La velocidad a la que la luz pasa de su valor al valor minimo o maximo hacia la camara")]
@@ -268,7 +266,7 @@ public class PlayerController : MonoBehaviour {
         direction.x = xMove;
         direction.z = zMove;
 
-        if (/*!independentFacing && */canMove)
+        if (!independentFacing && canMove)
         {
             //Face where you go
 
@@ -320,29 +318,25 @@ public class PlayerController : MonoBehaviour {
 
     private void RotateByJoystick()
     {
-        //transform.Rotate(Vector3.up, xRotation * rotationSpeed * Time.deltaTime);
+        if (xMove == 0 && zMove == 0 || independentFacing)
+            transform.Rotate(Vector3.up, xRotation * rotationSpeed * Time.deltaTime);
 
-        //xLanternRotationValue = Mathf.Clamp(xLanternRotationValue + yRotation * lanternRotationSpeed * Time.deltaTime, -topLanternAngle, bottomLanternAngle);
+        xLanternRotationValue = Mathf.Clamp(xLanternRotationValue + yRotation * lanternRotationSpeed * Time.deltaTime, -topLanternAngle, bottomLanternAngle);
 
-        xLanternRotationValue = Mathf.Lerp(-lanternAngle, lanternAngle, 0.5f + (yRotation / 2));
-        yLanternRotationValue = Mathf.Lerp(-lanternAngle, lanternAngle, 0.5f + (xRotation / 2));
-
-        //lanternAngle
-
-        if (xLanternRotationValue < -lanternAngle + 10)
+        if (xLanternRotationValue < -topLanternAngle + 10)
         {
             CameraBehaviour.Instance.ChangeCameraLookState(CameraBehaviour.CameraLookState.LookUp);
         }
-        else if (xLanternRotationValue > lanternAngle - 3)
+        else if (xLanternRotationValue > bottomLanternAngle - 3)
         {
             CameraBehaviour.Instance.ChangeCameraLookState(CameraBehaviour.CameraLookState.LookDown);
         }
-        else if (xLanternRotationValue > -lanternAngle + 15 && xLanternRotationValue < lanternAngle - 6)
+        else if (xLanternRotationValue > -topLanternAngle + 15 && xLanternRotationValue < bottomLanternAngle - 6)
         {
             CameraBehaviour.Instance.ChangeCameraLookState(CameraBehaviour.CameraLookState.Normal);
         }
 
-        lantern.localRotation = Quaternion.Euler(xLanternRotationValue, yLanternRotationValue, 0);
+        lantern.localRotation = Quaternion.Euler(xLanternRotationValue, 0, 0);
     }
 
     private void RotateByMove()

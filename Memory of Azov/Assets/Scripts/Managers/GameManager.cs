@@ -118,8 +118,6 @@ public class GameManager : MonoSingleton<GameManager> {
         else
             fpsText.gameObject.SetActive(true);
 
-
-        ModifyYModeInfo();
     }
 
     private void Update()
@@ -364,25 +362,7 @@ public class GameManager : MonoSingleton<GameManager> {
     #region Pause Methods
     private void PauseActions()
     {
-        if (InputsManager.Instance.GetChangeColorButtonInputDown())
-        {
-            InputsManager.Instance.InvertY();
-            ModifyYModeInfo();
-        }
-    }
 
-    private void ModifyYModeInfo ()
-    {
-        if (InputsManager.Instance.invertVerticalRotation)
-        {
-            //Inverted (Modo actual)
-            currentYControlMode.text = "Not-Inverted";
-        }
-        else
-        {
-            //Not Inverted (Luigi's Mansion)
-            currentYControlMode.text = "Inverted";
-        }
     }
 
     private void PauseGame()
