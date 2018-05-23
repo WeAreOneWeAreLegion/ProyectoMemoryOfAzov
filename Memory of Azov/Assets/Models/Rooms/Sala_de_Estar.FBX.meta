@@ -1,0 +1,180 @@
+fileFormatVersion: 2
+guid: e4ed04951f47e9d41b5e1fe181a85f6d
+timeCreated: 1527095787
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Columna037
+    100002: Columna042
+    100004: Columna043
+    100006: Columna044
+    100008: Corrtin002
+    100010: Corrtin004
+    100012: Corrtin005
+    100014: Cortina003
+    100016: Cortina004
+    100018: Cortina005
+    100020: Cortina006
+    100022: Cortina007
+    100024: Cortina008
+    100026: Lampara004
+    100028: Pared002
+    100030: Pared015
+    100032: Pared016
+    100034: //RootNode
+    400000: Columna037
+    400002: Columna042
+    400004: Columna043
+    400006: Columna044
+    400008: Corrtin002
+    400010: Corrtin004
+    400012: Corrtin005
+    400014: Cortina003
+    400016: Cortina004
+    400018: Cortina005
+    400020: Cortina006
+    400022: Cortina007
+    400024: Cortina008
+    400026: Lampara004
+    400028: Pared002
+    400030: Pared015
+    400032: Pared016
+    400034: //RootNode
+    2100000: obj_texture003
+    2100002: palacio (3)_LeftDoorMat
+    2300000: Columna037
+    2300002: Columna042
+    2300004: Columna043
+    2300006: Columna044
+    2300008: Corrtin002
+    2300010: Corrtin004
+    2300012: Corrtin005
+    2300014: Cortina003
+    2300016: Cortina004
+    2300018: Cortina005
+    2300020: Cortina006
+    2300022: Cortina007
+    2300024: Cortina008
+    2300026: Lampara004
+    2300028: Pared002
+    2300030: Pared015
+    2300032: Pared016
+    2300034: //RootNode
+    3300000: Columna037
+    3300002: Columna042
+    3300004: Columna043
+    3300006: Columna044
+    3300008: Corrtin002
+    3300010: Corrtin004
+    3300012: Corrtin005
+    3300014: Cortina003
+    3300016: Cortina004
+    3300018: Cortina005
+    3300020: Cortina006
+    3300022: Cortina007
+    3300024: Cortina008
+    3300026: Lampara004
+    3300028: Pared002
+    3300030: Pared015
+    3300032: Pared016
+    3300034: //RootNode
+    4300000: SalaDeEstar Done
+    4300002: Columna037
+    4300004: Cortina003
+    4300006: Pared002
+    4300008: Corrtin002
+    4300010: Pared015
+    4300012: Pared016
+    4300014: Columna042
+    4300016: Columna043
+    4300018: Columna044
+    4300020: Cortina004
+    4300022: Cortina005
+    4300024: Cortina006
+    4300026: Cortina007
+    4300028: Cortina008
+    4300030: Corrtin004
+    4300032: Corrtin005
+    4300034: Lampara004
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
