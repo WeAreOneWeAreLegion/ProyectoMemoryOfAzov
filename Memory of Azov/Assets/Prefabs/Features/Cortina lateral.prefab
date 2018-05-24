@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4949095560339464}
   m_Layer: 0
-  m_Name: CortinaLATERAL
+  m_Name: Cortina lateral
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
