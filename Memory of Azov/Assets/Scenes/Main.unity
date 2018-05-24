@@ -1383,7 +1383,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 102100631}
-  m_LocalRotation: {x: 0.7071057, y: 0.70710784, z: -0.00027930757, w: -0.00028072094}
+  m_LocalRotation: {x: 0.70710564, y: 0.7071078, z: -0.00027930754, w: -0.0002807209}
   m_LocalPosition: {x: 0.0597489, y: -0.195311, z: 0.0438084}
   m_LocalScale: {x: 1, y: 1.0000004, z: 1.0000004}
   m_Children:
@@ -13433,7 +13433,7 @@ Prefab:
     - target: {fileID: 114899250908347422, guid: 6943450eeef8fca4d80da847bc1b2b9e,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowMenuConfirmationPanel
+      value: LoadMenu
       objectReference: {fileID: 0}
     - target: {fileID: 114547119526944006, guid: 6943450eeef8fca4d80da847bc1b2b9e,
         type: 2}
@@ -13443,7 +13443,7 @@ Prefab:
     - target: {fileID: 114547119526944006, guid: 6943450eeef8fca4d80da847bc1b2b9e,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowQuitConfirmationPanel
+      value: QuitGame
       objectReference: {fileID: 0}
     - target: {fileID: 114980059731012142, guid: 6943450eeef8fca4d80da847bc1b2b9e,
         type: 2}
@@ -13463,7 +13463,7 @@ Prefab:
     - target: {fileID: 114690608584426376, guid: 6943450eeef8fca4d80da847bc1b2b9e,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowRestartConfirmationPanel
+      value: RestartScene
       objectReference: {fileID: 0}
     - target: {fileID: 114251352535744984, guid: 6943450eeef8fca4d80da847bc1b2b9e,
         type: 2}
@@ -22513,7 +22513,7 @@ MonoBehaviour:
     changeColorButton: 101
     chargeTrigger: Fire1
     pauseButton: 27
-  isControllerPlaying: 0
+  isControllerPlaying: 1
   invertVerticalRotation: 1
   joystickRotationFactor: 3
   leftPlayer1Vibrator: 0
@@ -32638,7 +32638,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1030763079}
-  m_LocalRotation: {x: -0.7071057, y: 0.70710784, z: 0.00028072178, w: -0.00027930673}
+  m_LocalRotation: {x: -0.70710564, y: 0.7071078, z: 0.00028072175, w: -0.0002793067}
   m_LocalPosition: {x: 0.0597489, y: 0.195311, z: 0.0438095}
   m_LocalScale: {x: 1, y: 1.0000004, z: 1.0000004}
   m_Children:
