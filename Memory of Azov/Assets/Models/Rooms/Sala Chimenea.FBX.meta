@@ -1,23 +1,23 @@
 fileFormatVersion: 2
-guid: 6ed5bab5f387d02498b93edc4269a919
-timeCreated: 1527095786
+guid: 8d014e0c551aaf94a84f8fa86edb42fe
+timeCreated: 1527180003
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Columna051
-    100004: Columna052
-    400000: //RootNode
-    400002: Columna051
-    400004: Columna052
+    100000: Columna051
+    100002: Columna052
+    100004: //RootNode
+    400000: Columna051
+    400002: Columna052
+    400004: //RootNode
     2100000: obj_texture003
-    2300000: //RootNode
-    2300002: Columna051
-    2300004: Columna052
-    3300000: //RootNode
-    3300002: Columna051
-    3300004: Columna052
+    2300000: Columna051
+    2300002: Columna052
+    2300004: //RootNode
+    3300000: Columna051
+    3300002: Columna052
+    3300004: //RootNode
     4300000: SalaChimenea
     4300002: Columna051
     4300004: Columna052

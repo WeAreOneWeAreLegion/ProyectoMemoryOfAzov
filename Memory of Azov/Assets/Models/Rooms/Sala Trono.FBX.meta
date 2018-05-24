@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 351e5d3298de3c0409a504969806a361
-timeCreated: 1527095786
+guid: 7edeed31e6548d043bf5e838e410a7e0
+timeCreated: 1527180003
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -27,27 +27,27 @@ ModelImporter:
     100038: Columna073
     100040: Columna074
     100042: Columna075
-    100044: //RootNode
-    100046: Lampara
-    100048: Lampara002
-    100050: Lampara006
-    100052: Lampara007
-    100054: LionStatue002
-    100056: LionStatue003
-    100058: Pared004
-    100060: Pared005
-    100062: Pared006
-    100064: Pared007
-    100066: Pared008
-    100068: Pared009
-    100070: Pared010
-    100072: Pared011
-    100074: Pared012
-    100076: Pared013
-    100078: Pared018
-    100080: Pared019
-    100082: Pared020
-    100084: Pared021
+    100044: Lampara
+    100046: Lampara002
+    100048: Lampara006
+    100050: Lampara007
+    100052: LionStatue002
+    100054: LionStatue003
+    100056: Pared004
+    100058: Pared005
+    100060: Pared006
+    100062: Pared007
+    100064: Pared008
+    100066: Pared009
+    100068: Pared010
+    100070: Pared011
+    100072: Pared012
+    100074: Pared013
+    100076: Pared018
+    100078: Pared019
+    100080: Pared020
+    100082: Pared021
+    100084: //RootNode
     100086: StraightStair002
     400000: Banderas
     400002: Banderas001
@@ -71,27 +71,27 @@ ModelImporter:
     400038: Columna073
     400040: Columna074
     400042: Columna075
-    400044: //RootNode
-    400046: Lampara
-    400048: Lampara002
-    400050: Lampara006
-    400052: Lampara007
-    400054: LionStatue002
-    400056: LionStatue003
-    400058: Pared004
-    400060: Pared005
-    400062: Pared006
-    400064: Pared007
-    400066: Pared008
-    400068: Pared009
-    400070: Pared010
-    400072: Pared011
-    400074: Pared012
-    400076: Pared013
-    400078: Pared018
-    400080: Pared019
-    400082: Pared020
-    400084: Pared021
+    400044: Lampara
+    400046: Lampara002
+    400048: Lampara006
+    400050: Lampara007
+    400052: LionStatue002
+    400054: LionStatue003
+    400056: Pared004
+    400058: Pared005
+    400060: Pared006
+    400062: Pared007
+    400064: Pared008
+    400066: Pared009
+    400068: Pared010
+    400070: Pared011
+    400072: Pared012
+    400074: Pared013
+    400076: Pared018
+    400078: Pared019
+    400080: Pared020
+    400082: Pared021
+    400084: //RootNode
     400086: StraightStair002
     2100000: obj_texture003
     2100002: palacio (3)_LeftDoorMat
@@ -117,27 +117,27 @@ ModelImporter:
     2300038: Columna073
     2300040: Columna074
     2300042: Columna075
-    2300044: //RootNode
-    2300046: Lampara
-    2300048: Lampara002
-    2300050: Lampara006
-    2300052: Lampara007
-    2300054: LionStatue002
-    2300056: LionStatue003
-    2300058: Pared004
-    2300060: Pared005
-    2300062: Pared006
-    2300064: Pared007
-    2300066: Pared008
-    2300068: Pared009
-    2300070: Pared010
-    2300072: Pared011
-    2300074: Pared012
-    2300076: Pared013
-    2300078: Pared018
-    2300080: Pared019
-    2300082: Pared020
-    2300084: Pared021
+    2300044: Lampara
+    2300046: Lampara002
+    2300048: Lampara006
+    2300050: Lampara007
+    2300052: LionStatue002
+    2300054: LionStatue003
+    2300056: Pared004
+    2300058: Pared005
+    2300060: Pared006
+    2300062: Pared007
+    2300064: Pared008
+    2300066: Pared009
+    2300068: Pared010
+    2300070: Pared011
+    2300072: Pared012
+    2300074: Pared013
+    2300076: Pared018
+    2300078: Pared019
+    2300080: Pared020
+    2300082: Pared021
+    2300084: //RootNode
     2300086: StraightStair002
     3300000: Banderas
     3300002: Banderas001
@@ -161,27 +161,27 @@ ModelImporter:
     3300038: Columna073
     3300040: Columna074
     3300042: Columna075
-    3300044: //RootNode
-    3300046: Lampara
-    3300048: Lampara002
-    3300050: Lampara006
-    3300052: Lampara007
-    3300054: LionStatue002
-    3300056: LionStatue003
-    3300058: Pared004
-    3300060: Pared005
-    3300062: Pared006
-    3300064: Pared007
-    3300066: Pared008
-    3300068: Pared009
-    3300070: Pared010
-    3300072: Pared011
-    3300074: Pared012
-    3300076: Pared013
-    3300078: Pared018
-    3300080: Pared019
-    3300082: Pared020
-    3300084: Pared021
+    3300044: Lampara
+    3300046: Lampara002
+    3300048: Lampara006
+    3300050: Lampara007
+    3300052: LionStatue002
+    3300054: LionStatue003
+    3300056: Pared004
+    3300058: Pared005
+    3300060: Pared006
+    3300062: Pared007
+    3300064: Pared008
+    3300066: Pared009
+    3300068: Pared010
+    3300070: Pared011
+    3300072: Pared012
+    3300074: Pared013
+    3300076: Pared018
+    3300078: Pared019
+    3300080: Pared020
+    3300082: Pared021
+    3300084: //RootNode
     3300086: StraightStair002
     4300000: SalTrono
     4300002: Pared013
@@ -258,7 +258,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 30
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
