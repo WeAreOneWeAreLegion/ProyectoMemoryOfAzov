@@ -29432,6 +29432,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114275044864733224, guid: 70489b9679787c748a47bb4d0b8caee0,
+        type: 2}
+      propertyPath: myDoor
+      value: 
+      objectReference: {fileID: 1382865220}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 70489b9679787c748a47bb4d0b8caee0, type: 2}
   m_IsPrefabParent: 0
@@ -40604,7 +40609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a366ee19be7a304db8d1d85f5152e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDoorType: 0
+  currentDoorType: 2
   isLightSwitcher: 0
   lightenedTimeToShow: 3
   isRightOpener: 0
