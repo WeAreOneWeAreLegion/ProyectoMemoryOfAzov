@@ -49,6 +49,8 @@ public class GameManager : MonoSingleton<GameManager> {
     public PlayerHUD playerHUD;
     [Tooltip("Referencia al hud del enemigo")]
     public GameObject enemyHUDPrefab;
+    [Tooltip("Referencia to gems panel")]
+    public RectTransform gemsPanel;
     [Tooltip("Referencia al hud de pausa")]
     public GameObject pausePanel;
     //Componens
@@ -60,17 +62,14 @@ public class GameManager : MonoSingleton<GameManager> {
     public Text gemsText;
     [Tooltip("Referencia a la sombra del texto de gemas")]
     public Text gemsTextShadow;
-    [Tooltip("Referencia al texto de control vertical actual")]
-    public Text currentYControlMode;
     [Tooltip("Referencia al texto de fps")]
     public Text fpsText;
-
-    [Header("Tags List")]
-    [Tooltip("0.Player, 1.Enemy, 2.Wall, 3.Door 4.DoorTrigger 5.Bell 6.HittableObjets 7.FakeWall")]
-    public List<string> tagList = new List<string>();
-    #endregion
-
-    public List<GameObject> allgems = new List<GameObject>();
+    [Tooltip("Posicion en el cual el panel de gemas esta escondido")]
+    public float gemsPanelYHidden = 100;
+    [Tooltip("Posicion en el cual el panel de gemas esta mostradose")]
+    public float gemsPanelYShown = 0;
+    [Tooltip("Tiempo en el cual el panel de gemas tardara en aparecer del todo")]
+    public float gemsPanelTime = 1;
 
     [Header("\t--Pause Menu Variables--")]
     [Tooltip("")]
@@ -83,10 +82,17 @@ public class GameManager : MonoSingleton<GameManager> {
     //public GameObject finalMenuConfirmationPanel;
     public bool confirmationPanelOpen = false;
 
+    [Header("Tags List")]
+    [Tooltip("0.Player, 1.Enemy, 2.Wall, 3.Door 4.DoorTrigger 5.Bell 6.HittableObjets 7.FakeWall")]
+    public List<string> tagList = new List<string>();
+    #endregion
+
     #region Private Variables
     private bool combateMode;
     private float deltaTime;
+    private float gemsPanelTimer;
     private bool isGamePaused;
+    private bool showGemsPanel;
 
     //Persistance variables
     private int maxNumOfGems = 6;
@@ -127,6 +133,18 @@ public class GameManager : MonoSingleton<GameManager> {
 
         if (InputsManager.Instance.GetStartButtonDown())
             PauseGame();
+
+        GemsPanel();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ShowGemsPanel();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            HideGemsPanel();
+        }
 
         if (isGamePaused)
             PauseActions();
@@ -277,6 +295,29 @@ public class GameManager : MonoSingleton<GameManager> {
     {
         playerHUD.HideImage();
     }
+
+    private void GemsPanel()
+    {
+        if (showGemsPanel)
+        {
+            if (gemsPanelTimer >= 1)
+            {
+
+                gemsPanelTimer = 1;
+            }
+            else
+                gemsPanelTimer += Time.deltaTime / gemsPanelTime;
+        }
+        else
+        {
+            if (gemsPanelTimer <= 0)
+                gemsPanelTimer = 0;
+            else
+                gemsPanelTimer -= Time.deltaTime / gemsPanelTime;
+        }
+
+        gemsPanel.anchoredPosition = Vector2.up * Mathf.Lerp(gemsPanelYHidden, gemsPanelYShown, gemsPanelTimer) + Vector2.right * gemsPanel.anchoredPosition.x;
+    }
     #endregion
 
     #region Persistance Modify Methods
@@ -347,6 +388,16 @@ public class GameManager : MonoSingleton<GameManager> {
     #endregion
 
     //Setters
+
+    public void ShowGemsPanel()
+    {
+        showGemsPanel = true;
+    }
+
+    public void HideGemsPanel()
+    {
+        showGemsPanel = false;
+    }
 
     #region FPS Method
     private void ShowFPS()
