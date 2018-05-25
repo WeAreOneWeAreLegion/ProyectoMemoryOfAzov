@@ -68,7 +68,7 @@ public class TransparentObject : MonoBehaviour {
 
     private void Update()
     {
-        if ((isDoor && !isHorizontalDoor))
+        if ((isDoor && !isHorizontalDoor) || (!isDoor && !isWall))
         {
             return;
         }

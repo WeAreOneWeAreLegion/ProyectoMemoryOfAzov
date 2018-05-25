@@ -384,7 +384,7 @@ public class Enemy : LightenableObject {
 
         myMat.SetFloat("_DisAmount", 1 - (currentHp / initialHp));
 
-        //GameManager.Instance.ModifyEnemyHp(transform, Mathf.RoundToInt(currentHp));
+        GameManager.Instance.ModifyEnemyHp(transform, Mathf.RoundToInt(currentHp));
 
         if (currentHp <= 0)
         {
@@ -395,7 +395,7 @@ public class Enemy : LightenableObject {
 
             myRGB.velocity = Vector3.zero;
 
-            //GameManager.Instance.DestroyEnemyHUD(transform);
+            GameManager.Instance.DestroyEnemyHUD(transform);
             GameManager.Instance.IncreseNumOfGhostsCaptured();
             EnemyManager.Instance.ReturnEnemy(gameObject);
         }

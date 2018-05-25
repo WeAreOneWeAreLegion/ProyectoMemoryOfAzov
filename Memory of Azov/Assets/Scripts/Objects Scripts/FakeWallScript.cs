@@ -186,6 +186,7 @@ public class FakeWallScript : MonoBehaviour {
             }
 
             ActiveBothRooms();
+            CameraBehaviour.Instance.ChangeCameraBehaviourState(CameraBehaviour.CameraState.FakeWall);
 
             currentRotationBeforeTurn = parent.transform.eulerAngles.y;
             isTurning = true;

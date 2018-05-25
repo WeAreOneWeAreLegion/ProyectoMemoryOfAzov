@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class PlayerController : MonoBehaviour {
 
@@ -46,6 +47,8 @@ public class PlayerController : MonoBehaviour {
     [Range(0, 15)] public float chargedLightFadeSpeed = 1f;
     [Tooltip("Tiempo que tarda la linterna en estar cargado al maximo")]
     [Range(0, 5)] public float timeForMaxCharged = 2f;
+    [Tooltip("Tiempo que tarda la linterna en apagarse mientras cargas")]
+    [Range(0, 5)] public float timeOfReductedLightWhenCharging = 0.2f;
     [Tooltip("Tiempo para reutilizar el flash")]
     [Range(0, 5)] public float timeBetweenFlashes = 1f;
 
@@ -122,6 +125,7 @@ public class PlayerController : MonoBehaviour {
 
     //Timer variables
     private float lightChargingTimer;
+    private float lightReducedChargingTimer;
     private float delayBetweenChargedShotTimer;
     private float aimTimer;
     private float hitTimer;
@@ -363,8 +367,8 @@ public class PlayerController : MonoBehaviour {
     {
         if (isLightCharging)
         {
-            lanternLight.range = Mathf.Lerp(initialLanternLightRange, lanternChargingLength, lightChargingTimer);
-            lanternDamageLength = Mathf.Lerp(initialLanternDamageLength, lanternChargingLength, lightChargingTimer);
+            lanternLight.range = Mathf.Lerp(initialLanternLightRange, lanternChargingLength, lightReducedChargingTimer);
+            lanternDamageLength = Mathf.Lerp(initialLanternDamageLength, lanternChargingLength, lightReducedChargingTimer);
         }
         else
         {
@@ -422,8 +426,24 @@ public class PlayerController : MonoBehaviour {
 
     private void LightDamaging()
     {
-        if (!lightEnabled || (ghostsInRadius.Count == 0 && lightenObjectInRadius.Count == 0 && lightenedPuzzlesInRadius.Count == 0))
+        if (!lightEnabled || (ghostsInRadius.Count == 0 && lightenObjectInRadius.Count == 0 && lightenedPuzzlesInRadius.Count == 0) || isLightCharging)
         {
+            if (isLightCharging)
+            {
+                foreach (GameObject g in ghostsInRadius)
+                {
+                    Enemy gc = g.GetComponent<Enemy>();
+
+                    gc.OutsideLanternRange();
+                }
+
+                foreach (GameObject p in lightenObjectInRadius)
+                {
+                    LightenableObject wp = p.GetComponent<LightenableObject>();
+
+                    wp.OutsideLanternRange();
+                }
+            }
             return;
         }
 
@@ -441,7 +461,7 @@ public class PlayerController : MonoBehaviour {
         {
             Enemy gc = g.GetComponent<Enemy>();
 
-            Vector3 ghostPositionWithRadius = GetGhostPositionWithRadius(gc.transform.position, gc.ghostSize);
+            Vector3 ghostPositionWithRadius = GetGhostPositionWithRadius(gc.transform.position, gc.ghostSize / 2);
 
             if (Mathf.Abs(Vector3.Angle((ghostPositionWithRadius - lantern.transform.position).normalized, lantern.forward)) < lanternDamageRadius && (!gc.IsInSight() || gc.IsStunned() != isMaxIntensity))
             {
@@ -524,6 +544,8 @@ public class PlayerController : MonoBehaviour {
         {
             lightChargingTimer += Time.deltaTime / timeForMaxCharged;
 
+            lightReducedChargingTimer += Time.deltaTime / timeOfReductedLightWhenCharging;
+
             if (lightChargingTimer >= 1)
             {
                 var col = chargindParticles.colorOverLifetime;
@@ -540,6 +562,7 @@ public class PlayerController : MonoBehaviour {
             if (delayBetweenChargedShotTimer >= 1)
             {
                 delayBetweenChargedShotTimer = 1;
+                lightReducedChargingTimer = 0;
             }
         }
     }
@@ -552,6 +575,11 @@ public class PlayerController : MonoBehaviour {
             {
                 MoveAgain();
             }
+        }
+
+        if (canMove && !lightEnabled)
+        {
+            SwitchLight();
         }
     }
 
@@ -663,11 +691,9 @@ public class PlayerController : MonoBehaviour {
             }
             else if (hitTag == GameManager.Instance.GetTagOfDesiredType(GameManager.TypeOfTag.FakeWall))
             {
-                Debug.Log("fake wall detected");
                 transform.forward = -hit.normal;
                 if (hit.transform.parent.GetComponent<FakeWallScript>().OpenDoorAnimation())
                 {
-                    Debug.Log("fake wall taked");
                     currentFakeWall = hit.transform.parent.GetComponent<FakeWallScript>();
                     transform.parent = hit.transform;
 
@@ -716,6 +742,7 @@ public class PlayerController : MonoBehaviour {
 
         isLightCharging = true;
         lightChargingTimer = 0;
+        lightReducedChargingTimer = 0;
 
         chargindParticles.gameObject.SetActive(true);
         var col = chargindParticles.colorOverLifetime;
@@ -735,6 +762,9 @@ public class PlayerController : MonoBehaviour {
             isLightHighIntensity = true;
         }
         delayBetweenChargedShotTimer = 0;
+
+        lightChargingTimer = 0;
+        lightReducedChargingTimer = 0;
 
         chargindParticles.gameObject.SetActive(false);
     }
@@ -859,7 +889,7 @@ public class PlayerController : MonoBehaviour {
         {
             ChangePlayerState(State.Playing);
             transform.parent = null;
-            CameraBehaviour.Instance.ResetWallDetection();
+            CameraBehaviour.Instance.EndCrossDoorMovement();
             currentFakeWall.CloseDoorAnimation();
         }
     }

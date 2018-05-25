@@ -3,7 +3,7 @@ using UnityEditor;
 
 public class CameraBehaviour : MonoSingleton<CameraBehaviour> {
 
-    public enum CameraState { Following, CrossDoor, Cinematic }
+    public enum CameraState { Following, CrossDoor, FakeWall, Cinematic }
     public enum CameraLookState { Normal, LookUp, LookDown }
 
     [System.Serializable]
@@ -53,6 +53,7 @@ public class CameraBehaviour : MonoSingleton<CameraBehaviour> {
     private float currentRotation;
     private bool wallsFound;
     private bool backwardDistanceSet;
+    private bool dontFollow;
     private float backwardFirstDistance;
 
     private Vector3 moveAtPoint;
@@ -100,6 +101,8 @@ public class CameraBehaviour : MonoSingleton<CameraBehaviour> {
         {   
             //Cinematic
         }
+        else if (currentState == CameraState.FakeWall)
+            FakeWallMovement();
     }
 
     #region Following Methods
@@ -108,6 +111,11 @@ public class CameraBehaviour : MonoSingleton<CameraBehaviour> {
         if (currentCameraLook.cameraAngle != transform.eulerAngles.x)
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(Vector3.right * currentCameraLook.cameraAngle), cameraAngularSpeed * Time.deltaTime);
+        }
+
+        if (dontFollow)
+        {
+            return;
         }
 
         if (!wallsFound)
@@ -203,10 +211,20 @@ public class CameraBehaviour : MonoSingleton<CameraBehaviour> {
     }
     #endregion
 
+    #region Fake Wall Methods
+    private void FakeWallMovement()
+    {
+        transform.position = Vector3.Lerp(transform.position, target.position + (Vector3.up * currentCameraLook.cameraYOffset) - (transform.forward * currentCameraLook.cameraDistance), cameraFollowSpeed * Time.deltaTime);
+    }
+    #endregion
+
     #region Public Methods
     public void ChangeCameraBehaviourState(CameraState newState)
     {
         currentState = newState;
+
+        if (newState == CameraState.FakeWall)
+            dontFollow = !dontFollow;
     }
 
     public void ChangeCameraLookState(CameraLookState newLookState)

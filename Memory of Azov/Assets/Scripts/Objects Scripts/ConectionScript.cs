@@ -303,7 +303,7 @@ public class ConectionScript : LightenableObject {
 
     public void OpenDoorAnimation()
     {
-        if (isDoorOpen && currentDoorType == DoorType.Normal || (currentDoorType == DoorType.OpenByOneSide && isRightOpener ? IsRightClosestPoint(GameManager.Instance.GetPlayer().transform.position) : !IsRightClosestPoint(GameManager.Instance.GetPlayer().transform.position)))
+        if (isDoorOpen && (currentDoorType == DoorType.Normal || (currentDoorType == DoorType.OpenByOneSide && (isRightOpener ? IsRightClosestPoint(GameManager.Instance.GetPlayer().transform.position) : !IsRightClosestPoint(GameManager.Instance.GetPlayer().transform.position)))))
         {
 
             if (currentDoorType == DoorType.OpenByOneSide)
@@ -336,7 +336,7 @@ public class ConectionScript : LightenableObject {
 
     public bool IsDoorOpen()
     {
-        return isDoorOpen && (currentDoorType == DoorType.Normal || (currentDoorType == DoorType.OpenByOneSide && isRightOpener ? IsRightClosestPoint(GameManager.Instance.GetPlayer().transform.position) : !IsRightClosestPoint(GameManager.Instance.GetPlayer().transform.position)));
+        return isDoorOpen && (currentDoorType == DoorType.Normal || (currentDoorType == DoorType.OpenByOneSide && (isRightOpener ? IsRightClosestPoint(GameManager.Instance.GetPlayer().transform.position) : !IsRightClosestPoint(GameManager.Instance.GetPlayer().transform.position))));
     }
 
     public void CloseDoorAnimation()
