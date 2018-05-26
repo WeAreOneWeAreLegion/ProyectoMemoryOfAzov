@@ -16,6 +16,8 @@ public class InputsManager : MonoSingleton<InputsManager> {
         YButton,
         RTrigger,
         LTrigger,
+        RButton,
+        LButton,
         StartButton
     }
 
@@ -119,17 +121,17 @@ public class InputsManager : MonoSingleton<InputsManager> {
 
     public bool GetIntensityButtonDown()
     {
-        return isControllerPlaying ? Input.GetAxisRaw(xboxInputs.chargeTrigger1.ToString()) > 0.2f || Input.GetAxisRaw(xboxInputs.chargeTrigger2.ToString()) > 0.2f : Input.GetButtonDown(pcInputs.chargeTrigger.ToString());
+        return isControllerPlaying ? Input.GetButtonDown(xboxInputs.chargeTrigger1.ToString()) || Input.GetButtonDown(xboxInputs.chargeTrigger2.ToString()) : Input.GetButtonDown(pcInputs.chargeTrigger.ToString());
     }
 
     public bool GetIntensityButtonUp()
     {
-        return isControllerPlaying ? Input.GetAxisRaw(xboxInputs.chargeTrigger1.ToString()) < 0.2f && Input.GetAxisRaw(xboxInputs.chargeTrigger2.ToString()) < 0.2f : Input.GetButtonUp(pcInputs.chargeTrigger.ToString());
+        return isControllerPlaying ? Input.GetButtonUp(xboxInputs.chargeTrigger1.ToString()) && Input.GetButtonUp(xboxInputs.chargeTrigger2.ToString()) : Input.GetButtonUp(pcInputs.chargeTrigger.ToString());
     }
 
     public bool GetStartButtonDown()
     {
-        return isControllerPlaying ? Input.GetButtonUp(xboxInputs.pauseButton.ToString()) : Input.GetKeyDown(pcInputs.pauseButton);
+        return isControllerPlaying ? Input.GetButtonDown(xboxInputs.pauseButton.ToString()) : Input.GetKeyDown(pcInputs.pauseButton);
     }
 
     public void ActiveVibration()
