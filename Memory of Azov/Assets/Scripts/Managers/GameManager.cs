@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -72,15 +74,27 @@ public class GameManager : MonoSingleton<GameManager> {
     public float gemsPanelTime = 1;
 
     [Header("\t--Pause Menu Variables--")]
-    [Tooltip("")]
+    [Tooltip("Menu variables to know what to show depending on the menu I am currently at")]
     public GameObject pauseMenuGO;
     public GameObject restartConfirmationPanel;
     public GameObject settingsPanel;
     public GameObject menuConfirmationPanel;
     public GameObject quitConfirmationPanel;
+    [Tooltip("Button variables to know which button to return to after coming back to the pause menu. Used for the controller navigation through the menu")]
+    public GameObject resumeButton;
+    public GameObject restartButton;
+    public GameObject menuButton;
+    public GameObject quitButton;
+    [Tooltip("Button variables to know which button to start from after pressing a button. Used for the controller navigation through the menu")]
+    public GameObject yesButtonRestartConfirmationPanel;
+    public GameObject yesButtonMenuConfirmationPanel;
+    public GameObject yesButtonQuitConfirmationPanel;
     //public GameObject finalRestartConfirmationPanel;
     //public GameObject finalMenuConfirmationPanel;
+    [Tooltip("Bool variables to know if a confirmation panel is visible or not")]
     public bool confirmationPanelOpen = false;
+
+    public EventSystem myEventSystem;
 
     [Header("Tags List")]
     [Tooltip("0.Player, 1.Enemy, 2.Wall, 3.Door 4.DoorTrigger 5.Bell 6.HittableObjets 7.FakeWall")]
@@ -420,6 +434,8 @@ public class GameManager : MonoSingleton<GameManager> {
     {
         if (!confirmationPanelOpen)
         {
+            StartCoroutine(HighlightButton(resumeButton));
+            //EventSystem.current.SetSelectedGameObject(resumeButton);
             if (isGamePaused)
             {
                 Time.timeScale = 1;
@@ -432,7 +448,6 @@ public class GameManager : MonoSingleton<GameManager> {
                 pausePanel.SetActive(true);
                 pauseMenuGO.SetActive(true);
             }
-
             isGamePaused = !isGamePaused;
         }
     }
@@ -455,6 +470,8 @@ public class GameManager : MonoSingleton<GameManager> {
 
     public void ShowRestartConfirmationPanel()
     {
+        StartCoroutine(HighlightButton(yesButtonRestartConfirmationPanel));
+        //EventSystem.current.SetSelectedGameObject(yesButtonRestartConfirmationPanel);
         confirmationPanelOpen = true;
         restartConfirmationPanel.SetActive(true);
         pauseMenuGO.SetActive(false);
@@ -462,6 +479,8 @@ public class GameManager : MonoSingleton<GameManager> {
 
     public void HideRestartConfirmationPanel()
     {
+        StartCoroutine(HighlightButton(restartButton));
+        //EventSystem.current.SetSelectedGameObject(restartButton);
         confirmationPanelOpen = false;
         restartConfirmationPanel.SetActive(false);
         pauseMenuGO.SetActive(true);
@@ -477,6 +496,8 @@ public class GameManager : MonoSingleton<GameManager> {
 
     public void ShowMenuConfirmationPanel()
     {
+        StartCoroutine(HighlightButton(yesButtonMenuConfirmationPanel));
+        //EventSystem.current.SetSelectedGameObject(yesButtonMenuConfirmationPanel);
         confirmationPanelOpen = true;
         menuConfirmationPanel.SetActive(true);
         pauseMenuGO.SetActive(false);
@@ -484,6 +505,8 @@ public class GameManager : MonoSingleton<GameManager> {
 
     public void HideMenuConfirmationPanel()
     {
+        StartCoroutine(HighlightButton(menuButton));
+        //EventSystem.current.SetSelectedGameObject(menuButton);
         confirmationPanelOpen = false;
         menuConfirmationPanel.SetActive(false);
         pauseMenuGO.SetActive(true);
@@ -516,9 +539,10 @@ public class GameManager : MonoSingleton<GameManager> {
 #endif
     }
 
-
     public void ShowQuitConfirmationPanel()
     {
+        StartCoroutine(HighlightButton(yesButtonQuitConfirmationPanel));
+        //EventSystem.current.SetSelectedGameObject(yesButtonQuitConfirmationPanel);
         confirmationPanelOpen = true;
         quitConfirmationPanel.SetActive(true);
         pauseMenuGO.SetActive(false);
@@ -526,11 +550,20 @@ public class GameManager : MonoSingleton<GameManager> {
 
     public void HideQuitConfirmationPanel()
     {
+        StartCoroutine(HighlightButton(quitButton));
+        //EventSystem.current.SetSelectedGameObject(quitButton);
         confirmationPanelOpen = false;
         quitConfirmationPanel.SetActive(false);
         pauseMenuGO.SetActive(true);
     }
     #endregion
+
+    IEnumerator HighlightButton(GameObject myButton)
+    {
+        myEventSystem.SetSelectedGameObject(null);
+        yield return null;
+        myEventSystem.SetSelectedGameObject(myButton);//myEventSystem.firstSelectedGameObject);
+    }
     #endregion
 
     #region Game State Methods
