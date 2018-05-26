@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: cca0376d42b95214e8b0a28859770683
-timeCreated: 1527334307
+guid: bfb21ed518d9cf4429a7e750bb2c0592
+timeCreated: 1527370542
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -10,7 +10,7 @@ ModelImporter:
     2100000: obj_texture003
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Muro_Izquierda_Hall
+    4300000: PredPasilloDrecha
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -47,8 +47,8 @@ ModelImporter:
     addColliders: 0
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -67,7 +67,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
@@ -86,7 +86,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
