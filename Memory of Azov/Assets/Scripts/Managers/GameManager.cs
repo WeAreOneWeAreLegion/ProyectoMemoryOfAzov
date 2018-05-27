@@ -167,7 +167,52 @@ public class GameManager : MonoSingleton<GameManager> {
         }
 
         if (isGamePaused)
+        {
             PauseActions();
+
+            if (Input.GetKeyDown("joystick button 1"))
+            {
+                isGamePaused = false;
+                Time.timeScale = 1;
+                pausePanel.SetActive(false);
+                pauseMenuGO.SetActive(false);
+            }
+        }
+            
+        if (confirmationPanelOpen)
+        {
+            if (restartConfirmationPanel.gameObject.activeSelf)
+            {
+                if (Input.GetKeyDown("joystick button 1"))//Input.GetAxis("BButton") > 0)
+                {
+                    HideRestartConfirmationPanel();
+                }
+            }
+
+            if (settingsPanel.gameObject.activeSelf)
+            {
+                if (Input.GetKeyDown("joystick button 1"))
+                {
+                    HideSettingsPanel();
+                }
+            }
+
+            if (menuConfirmationPanel.gameObject.activeSelf)
+            {
+                if (Input.GetKeyDown("joystick button 1"))
+                {
+                    HideMenuConfirmationPanel();
+                }
+            }
+
+            if (quitConfirmationPanel.gameObject.activeSelf)
+            {
+                if (Input.GetKeyDown("joystick button 1"))
+                {
+                    HideQuitConfirmationPanel();
+                }
+            }
+        }
     }
 
     #region Door Methods
@@ -456,6 +501,7 @@ public class GameManager : MonoSingleton<GameManager> {
             }
             isGamePaused = !isGamePaused;
         }
+        
     }
 
     public void Resume()
@@ -542,11 +588,11 @@ public class GameManager : MonoSingleton<GameManager> {
 
         if (controllerToggleIsChecked)
         {
-            //InputsManager.isControllerPlaying = true;
+            InputsManager.Instance.isControllerPlaying = true; //InputsManager.isControllerPlaying = true;
         }
         else
         {
-            //InputsManager.isControllerPlaying = false;
+            InputsManager.Instance.isControllerPlaying = false; //InputsManager.isControllerPlaying = false;
         }
     }
     #endregion
