@@ -1,0 +1,183 @@
+fileFormatVersion: 2
+guid: 048eb3e33d02c274cb8192ee72c8afdb
+timeCreated: 1527414890
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Columna037
+    100002: Columna042
+    100004: Columna043
+    100006: Columna044
+    100008: Columna045
+    100010: Columna046
+    100012: Corrtin002
+    100014: Corrtin004
+    100016: Corrtin005
+    100018: Cortina003
+    100020: Cortina004
+    100022: Cortina005
+    100024: Cortina006
+    100026: Cortina007
+    100028: Cortina008
+    100030: Pared002
+    100032: Pared016
+    100034: //RootNode
+    100036: SalaDeEstar Done
+    400000: Columna037
+    400002: Columna042
+    400004: Columna043
+    400006: Columna044
+    400008: Columna045
+    400010: Columna046
+    400012: Corrtin002
+    400014: Corrtin004
+    400016: Corrtin005
+    400018: Cortina003
+    400020: Cortina004
+    400022: Cortina005
+    400024: Cortina006
+    400026: Cortina007
+    400028: Cortina008
+    400030: Pared002
+    400032: Pared016
+    400034: //RootNode
+    400036: SalaDeEstar Done
+    2100000: obj_texture003
+    2300000: Columna037
+    2300002: Columna042
+    2300004: Columna043
+    2300006: Columna044
+    2300008: Columna045
+    2300010: Columna046
+    2300012: Corrtin002
+    2300014: Corrtin004
+    2300016: Corrtin005
+    2300018: Cortina003
+    2300020: Cortina004
+    2300022: Cortina005
+    2300024: Cortina006
+    2300026: Cortina007
+    2300028: Cortina008
+    2300030: Pared002
+    2300032: Pared016
+    2300034: //RootNode
+    2300036: SalaDeEstar Done
+    3300000: Columna037
+    3300002: Columna042
+    3300004: Columna043
+    3300006: Columna044
+    3300008: Columna045
+    3300010: Columna046
+    3300012: Corrtin002
+    3300014: Corrtin004
+    3300016: Corrtin005
+    3300018: Cortina003
+    3300020: Cortina004
+    3300022: Cortina005
+    3300024: Cortina006
+    3300026: Cortina007
+    3300028: Cortina008
+    3300030: Pared002
+    3300032: Pared016
+    3300034: //RootNode
+    3300036: SalaDeEstar Done
+    4300000: Pared015
+    4300002: Columna045
+    4300004: SalaDeEstar Done
+    4300006: Columna037
+    4300008: Cortina003
+    4300010: Pared002
+    4300012: Cortina008
+    4300014: Columna042
+    4300016: Corrtin002
+    4300018: Cortina004
+    4300020: Corrtin004
+    4300022: Cortina007
+    4300024: Columna043
+    4300026: Pared016
+    4300028: Cortina005
+    4300030: Corrtin005
+    4300032: Cortina006
+    4300034: Columna044
+    4300036: Columna046
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 6
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
