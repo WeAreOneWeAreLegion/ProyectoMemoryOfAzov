@@ -83,18 +83,24 @@ public class GameManager : MonoSingleton<GameManager> {
     [Tooltip("Button variables to know which button to return to after coming back to the pause menu. Used for the controller navigation through the menu")]
     public GameObject resumeButton;
     public GameObject restartButton;
+    public GameObject settingsButton;
     public GameObject menuButton;
     public GameObject quitButton;
     [Tooltip("Button variables to know which button to start from after pressing a button. Used for the controller navigation through the menu")]
     public GameObject yesButtonRestartConfirmationPanel;
     public GameObject yesButtonMenuConfirmationPanel;
     public GameObject yesButtonQuitConfirmationPanel;
+    public GameObject controllerToggle;
     //public GameObject finalRestartConfirmationPanel;
     //public GameObject finalMenuConfirmationPanel;
-    [Tooltip("Bool variables to know if a confirmation panel is visible or not")]
+    [Tooltip("Bool variable to know if a confirmation panel is visible or not")]
     public bool confirmationPanelOpen = false;
+    [Tooltip("Bool variable to know if a the player is using a controller or a keyboard")]
+    public bool controllerToggleIsChecked = true;
 
     public EventSystem myEventSystem;
+
+    
 
     [Header("Tags List")]
     [Tooltip("0.Player, 1.Enemy, 2.Wall, 3.Door 4.DoorTrigger 5.Bell 6.HittableObjets 7.FakeWall")]
@@ -516,6 +522,7 @@ public class GameManager : MonoSingleton<GameManager> {
     #region Settings Button
     public void ShowSettingsPanel()
     {
+        StartCoroutine(HighlightButton(controllerToggle));
         confirmationPanelOpen = true;
         settingsPanel.SetActive(true);
         pauseMenuGO.SetActive(false);
@@ -523,9 +530,24 @@ public class GameManager : MonoSingleton<GameManager> {
 
     public void HideSettingsPanel()
     {
+        StartCoroutine(HighlightButton(settingsButton));
         confirmationPanelOpen = false;
         settingsPanel.SetActive(false);
         pauseMenuGO.SetActive(true);
+    }
+
+    public void SetControllerToggle()
+    {
+        controllerToggleIsChecked = !controllerToggleIsChecked;
+
+        if (controllerToggleIsChecked)
+        {
+            //InputsManager.isControllerPlaying = true;
+        }
+        else
+        {
+            //InputsManager.isControllerPlaying = false;
+        }
     }
     #endregion
 
